@@ -53,10 +53,10 @@ const removeAllumette = (userEntry) => {
         // vérifier que le joueur actuel a perdu
         if(allumettes <= 0){
             loose.textContent = `Oh non joueur ${currentPlayer}, tu as retirer la dernière allumettes.`;
-            return;
-        } 
-        // Passer au tour suivant
-        round();
+            restartGame()
+        } else {
+            round()
+        }
 
     }
     inputValue.value = ''
@@ -65,7 +65,7 @@ const removeAllumette = (userEntry) => {
 
 // Gestion tour des joueurs
 const round = () => {
-    currentPlayer = currentPlayer === nbrPlayer ? 1 : currentPlayer++;
+    currentPlayer = currentPlayer === nbrPlayer ? 1 : currentPlayer + 1;
     player.textContent = `Joueur ${currentPlayer}, a vous de jouer.`;
 }
 
@@ -94,5 +94,18 @@ const startGame = () => {
     displayGame(); 
     player.textContent = `Joueur ${currentPlayer}, a vous de jouer.`;
 };
+
+const restartGame = () => {
+    allumettes = 50;
+    currentPlayer = 1;
+    nbrPlayer = undefined
+    inputValue.textContent = '';
+    displayPlayer.textContent = 'Choississez vous êtes combien la ?? (2-4)';
+    player.textContent = '';
+    askInput.textContent = '';
+    tryAgain.textContent = '';
+    loose.textContent = '';
+    howMuchPlayer()
+}
 
 displayGame();
